@@ -1,0 +1,36 @@
+version: '2'
+services:
+  database:
+    image: "postgres:latest"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+  api:
+    image: "testorg/testapp:latest"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_SQL_INIT_MODE=always
+      - SPRING_DATASOURCE_SCHEMA=classpath:/schema.sql
+      - DEBUG=true
+    ports:
+      - "8080:8080"
+    links: 
+      - database
+  rss:
+    image: "testorg/testrss:latest"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_SQL_INIT_MODE=always
+      - SPRING_DATASOURCE_SCHEMA=classpath:/schema.sql
+      - DEBUG=true
+    ports:
+      - "8081:8081"
+    links:
+      - database
+
