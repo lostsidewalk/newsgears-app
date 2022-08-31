@@ -8,29 +8,51 @@ services:
     ports:
       - "5432:5432"
   api:
-    image: "testorg/testapp:latest"
+    image: "lostsidewalk/newsgears-api:latest"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_SQL_INIT_MODE=always
       - SPRING_DATASOURCE_SCHEMA=classpath:/schema.sql
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=redis
       - DEBUG=true
     ports:
       - "8080:8080"
+    depends_on:
+      - database
     links: 
       - database
   rss:
-    image: "testorg/testrss:latest"
+    image: "lostsidewalk/newsgears-rss:latest"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_SQL_INIT_MODE=always
       - SPRING_DATASOURCE_SCHEMA=classpath:/schema.sql
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=redis
       - DEBUG=true
     ports:
       - "8081:8081"
     links:
       - database
+    depends_on:
+      - database
+      - redis
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass redis
+    volumes:
+      - cache:/data
+volumes:
+  cache:
+    driver: local
 

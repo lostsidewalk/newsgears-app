@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 
 # grab latest commits from server
 git submodule update --recursive --remote
