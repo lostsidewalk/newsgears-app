@@ -4,3 +4,6 @@
 [submodule "newsgears-api"]
 	path = newsgears-api
 	url = https://github.com/meharris-bnr/newsgears-api.git
+[submodule "newsgears-engine"]
+	path = newsgears-engine
+	url = https://github.com/lostsidewalk/newsgears-engine
