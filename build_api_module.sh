@@ -61,7 +61,6 @@ docker build \
   --build-arg SPRING_MAIL_USERNAME=${mailUsername} \
   --build-arg SPRING_MAIL_PASSWORD=${mailPassword} \
   --build-arg TOKEN_SERVICE_SECRET=${tokenServiceSecret} \
-  --build-arg MAIL_CONFIG_DISABLED=${mailConfigDisabled} \
   --build-arg NEWS_API_KEY=${newsApiKey} \
   --build-arg STRIPE_SECRET_KEY=${stripeSecretKey} \
   --build-arg STRIPE_WH_SECRET_KEY=${stripeWhSecretKey} \
