@@ -72,7 +72,7 @@ docker build \
 if [ "${BUILD_ENV}" = "prod" ]
 then
 	echo "Pushing Docker image to prod ECR...";
-  docker tag 348965030247.dkr.ecr.us-east-2.amazonaws.com/feedgears/newsgears-${MODULE_NAME}:latest-prod
+  docker tag feedgears/newsgears-${MODULE_NAME}:latest-prod 348965030247.dkr.ecr.us-east-2.amazonaws.com/feedgears/newsgears-${MODULE_NAME}:latest-prod
   docker push 348965030247.dkr.ecr.us-east-2.amazonaws.com/feedgears/newsgears-${MODULE_NAME}:latest-prod
 fi
 
