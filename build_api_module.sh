@@ -57,7 +57,7 @@ docker build \
   --build-arg SPRING_REDIS_PASSWORD=${redisPassword} \
   --build-arg SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENTID=${googleClientId} \
   --build-arg SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENTSECRET=${googleClientSecret} \
-  --build-arg SPRING_MAIL_HOST=email-smtp.us-east-2.amazonaws.com \
+  --build-arg SPRING_MAIL_HOST=${mailHost} \
   --build-arg SPRING_MAIL_USERNAME=${mailUsername} \
   --build-arg SPRING_MAIL_PASSWORD=${mailPassword} \
   --build-arg TOKEN_SERVICE_SECRET=${tokenServiceSecret} \

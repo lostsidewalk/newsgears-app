@@ -19,6 +19,7 @@ sqlInitMode=always
 redisPassword=redis
 googleClientId=<Google client Id>
 googleClientSecret=<Google client secret>
+mailHost=<SMTP host>
 mailUsername=<SMTP username>
 mailPassword=<SMTP password>
 tokenServiceSecret=<arbitrary value>
