@@ -28,6 +28,7 @@ newsApiDisabled=true
 newsApiDebugSources=true
 stripeSecretKey=<Stripe test secret key>
 stripeWhSecretKey=<Stripe test WH secret key>
+stripePriceId=<Stripe product price Id>
 agentArg=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:45005
 ```
 

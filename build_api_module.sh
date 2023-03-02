@@ -64,6 +64,7 @@ docker build \
   --build-arg NEWS_API_KEY=${newsApiKey} \
   --build-arg STRIPE_SECRET_KEY=${stripeSecretKey} \
   --build-arg STRIPE_WH_SECRET_KEY=${stripeWhSecretKey} \
+  --build-arg STRIPE_PRICE_ID=${stripePriceId} \
   --build-arg NEWS_API_DISABLED=${newsApiDisabled} \
   --build-arg NEWS_API_DEBUG_SOURCES=${newsApiDebugSources} \
   -t feedgears/newsgears-${MODULE_NAME}:latest-${BUILD_ENV} \
