@@ -51,9 +51,6 @@ docker build \
   --build-arg SPRING_DATASOURCE_PASSWORD=${datasourcePassword} \
   --build-arg SPRING_REDIS_HOST=feedgears-cache01 \
   --build-arg SPRING_REDIS_PASSWORD=${redisPassword} \
-  --build-arg NEWS_API_KEY=${newsApiKey} \
-  --build-arg NEWS_API_DISABLED=${newsApiDisabled} \
-  --build-arg NEWS_API_DEBUG_SOURCES=${newsApiDebugSources} \
   -t feedgears/newsgears-${MODULE_NAME}:latest-${BUILD_ENV} \
   .
 
