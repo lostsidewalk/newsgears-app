@@ -64,6 +64,8 @@ docker build \
   --build-arg STRIPE_SECRET_KEY=${stripeSecretKey} \
   --build-arg STRIPE_WH_SECRET_KEY=${stripeWhSecretKey} \
   --build-arg STRIPE_PRICE_ID=${stripePriceId} \
+  --build-arg RCMD_SERVICE_URL=${rcmdServiceUrl} \
+  --build-arg RCMD_SERVICE_API_KEY=${rcmdServiceApiKey} \
   -t feedgears/newsgears-${MODULE_NAME}:latest-${BUILD_ENV} \
   .
 
