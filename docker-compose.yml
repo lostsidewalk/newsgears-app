@@ -16,8 +16,9 @@ services:
       - "45005:45005"
     depends_on:
       - feedgears-db01
-    links: 
+    links:
       - feedgears-db01
+      - feedgears-broker01
   feedgears-engine01:
     image: "feedgears/newsgears-engine:latest-local"
     environment:
@@ -41,6 +42,15 @@ services:
     depends_on:
       - feedgears-db01
       - feedgears-cache01
+  feedgears-broker01:
+    image: "feedgears/newsgears-broker:latest-local"
+    environment:
+      - DEBUG=false
+    ports:
+      - "8083:8083"
+      - "65015:65015"
+    depends_on:
+      - feedgears-db01
   feedgears-cache01:
     image: redis:6.2-alpine
     restart: always
@@ -49,6 +59,10 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass redis
     volumes:
       - cache:/data
+#  feedgears-client01:
+#    image: "feedgears/newsgears-client:latest-local"
+#    ports:
+#      - "3000:3000"
 volumes:
   cache:
     driver: local
