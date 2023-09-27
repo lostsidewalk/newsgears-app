@@ -30,18 +30,6 @@ services:
       - feedgears-db01
     links:
       - feedgears-db01
-  feedgears-feed01:
-    image: "feedgears/newsgears-rss:latest-local"
-    environment:
-      - DEBUG=false
-    ports:
-      - "8081:8081"
-      - "65005:65005"
-    links:
-      - feedgears-db01
-    depends_on:
-      - feedgears-db01
-      - feedgears-cache01
   feedgears-broker01:
     image: "feedgears/newsgears-broker:latest-local"
     environment:

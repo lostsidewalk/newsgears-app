@@ -65,10 +65,9 @@ agentArg=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:65015
 
 ```
 alias ng-api='./build_api_module.sh $@'
-alias ng-feed='./build_feed_module.sh $@'
 alias ng-engine='./build_engine_module.sh $@'
 alias ng-broker='./build_broker_module.sh $@'
-alias ng='cd ${SRC}/newsgears-app && ng-api --local && ng-feed --local && ng-engine --local && ng-broker && docker-compose up'
+alias ng='cd ${SRC}/newsgears-app && ng-api --local && ng-engine --local && ng-broker && docker-compose up'
 ```
 
 (6) Invoke the build process: 
@@ -82,6 +81,5 @@ $ ng
 ```
 $ ng-api --local # rebuild the API server Docker image 
 $ ng-engine --local # rebuild the engine server Docker image 
-$ ng-feed --local # rebuild the feed server Docker image
 $ ng-broker --local # rebuild the broker server Docker image  
 ```
