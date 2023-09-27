@@ -1,6 +1,3 @@
-[submodule "newsgears-rss"]
-	path = newsgears-rss
-	url = https://github.com/meharris-bnr/newsgears-rss.git
 [submodule "newsgears-api"]
 	path = newsgears-api
 	url = https://github.com/meharris-bnr/newsgears-api.git
