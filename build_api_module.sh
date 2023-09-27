@@ -47,7 +47,6 @@ docker build \
   --build-arg AGENT_ARG=${agentArg} \
   --build-arg NEWSGEARS_DEVELOPMENT=${isDevelopment} \
   --build-arg NEWSGEARS_APPURL=${appUrl} \
-  --build-arg NEWSGEARS_FEEDURL=${feedUrl} \
   --build-arg NEWSGEARS_ORIGINURL=${originUrl} \
   --build-arg NEWSGEARS_BROKERURL=${brokerUrl} \
   --build-arg NEWSGEARS_BROKERCLAIM=${brokerClaim} \
