@@ -62,9 +62,6 @@ docker build \
   --build-arg SPRING_MAIL_USERNAME=${mailUsername} \
   --build-arg SPRING_MAIL_PASSWORD=${mailPassword} \
   --build-arg TOKEN_SERVICE_SECRET=${tokenServiceSecret} \
-  --build-arg STRIPE_SECRET_KEY=${stripeSecretKey} \
-  --build-arg STRIPE_WH_SECRET_KEY=${stripeWhSecretKey} \
-  --build-arg STRIPE_PRICE_ID=${stripePriceId} \
   --build-arg RCMD_SERVICE_URL=${rcmdServiceUrl} \
   --build-arg RCMD_SERVICE_API_KEY=${rcmdServiceApiKey} \
   -t feedgears/newsgears-${MODULE_NAME}:latest-${BUILD_ENV} \
