@@ -48,7 +48,7 @@ fi
 echo "Building module: ${MODULE_NAME}, tag name: ${TAG_NAME}, isDebug: ${DEBUG}, agent args: ${AGENT_ARG}"
 
 # change to the module dir
-cd newsgears-${MODULE_NAME}
+cd ${MODULE_NAME}
 
 # build the artifacts via gradle
 ./gradlew clean build
@@ -57,7 +57,7 @@ cd newsgears-${MODULE_NAME}
 docker build \
   --build-arg JAR_FILE=build/libs/*.jar \
   --build-arg AGENT_ARG=${AGENT_ARG} \
-  -t feedgears/newsgears-${MODULE_NAME}:${TAG_NAME} \
+  -t feedgears/${MODULE_NAME}:${TAG_NAME} \
   .
 
 # return to parent dir (newsgears-app)
