@@ -7,3 +7,6 @@
 [submodule "newsgears-broker"]
 	path = newsgears-broker
 	url = https://github.com/lostsidewalk/newsgears-broker
+[submodule "newsgears-client"]
+	path = newsgears-client
+	url = https://github.com/lostsidewalk/newsgears-client.git
