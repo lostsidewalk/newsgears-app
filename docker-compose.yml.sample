@@ -16,7 +16,7 @@ services:
     volumes:
       - cache:/data
   feedgears-app01:
-    image: "feedgears/newsgears-api:latest-debug"
+    image: "lostsidewalk/newsgears-api:latest-debug"
     environment:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
@@ -46,7 +46,7 @@ services:
       - feedgears-db01
       - feedgears-broker01
   feedgears-engine01:
-    image: "feedgears/newsgears-engine:latest-debug"
+    image: "lostsidewalk/newsgears-engine:latest-debug"
     environment:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
@@ -60,11 +60,12 @@ services:
       - "55005:55005"
     depends_on:
       - feedgears-db01
+      - feedgears-cache01
       - feedgears-app01
     links:
       - feedgears-db01
   feedgears-broker01:
-    image: "feedgears/newsgears-broker:latest-debug"
+    image: "lostsidewalk/newsgears-broker:latest-debug"
     environment:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
@@ -80,7 +81,7 @@ services:
     depends_on:
       - feedgears-db01
   feedgears-client01:
-    image: "feedgears/newsgears-client:latest-local"
+    image: "lostsidewalk/newsgears-client:latest-local"
     ports:
       - "3000:3000"
     depends_on:

@@ -57,7 +57,7 @@ cd ${MODULE_NAME}
 docker build \
   --build-arg JAR_FILE=build/libs/*.jar \
   --build-arg AGENT_ARG=${AGENT_ARG} \
-  -t feedgears/${MODULE_NAME}:${TAG_NAME} \
+  -t lostsidewalk/${MODULE_NAME}:${TAG_NAME} \
   .
 
 # return to parent dir (newsgears-app)

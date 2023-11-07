@@ -16,7 +16,7 @@ npm run devbuild
 
 # build the docker image with the updated artifacts
 docker build \
-  -t feedgears/newsgears-client:latest-local \
+  -t lostsidewalk/newsgears-client:latest-local \
   .
 
 # return to parent dir (newsgears-app)
