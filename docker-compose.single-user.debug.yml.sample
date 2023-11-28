@@ -1,0 +1,94 @@
+version: '2'
+services:
+  feedgears-db01:
+    image: "postgres:latest"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+  feedgears-cache01:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass redis
+    volumes:
+      - cache:/data
+  feedgears-app01:
+    image: "lostsidewalk/newsgears-api:latest-debug"
+    environment:
+      - DEBUG=false
+      - NEWSGEARS_DEVELOPMENT=false
+      - NEWSGEARS_SINGLEUSERMODE=true
+      - NEWSGEARS_APPURL=http://feedgears-app01:8080
+      - NEWSGEARS_ORIGINURL=http://localhost:3000
+      - NEWSGEARS_BROKERURL=ws://feedgears-broker01:8083/server-broker
+      - NEWSGEARS_BROKERCLAIM=secret
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://feedgears-db01:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_REDIS_HOST=feedgears-cache01
+      - SPRING_REDIS_PASSWORD=redis
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_REDIRECTURI=http://localhost:8080/oauth2/callback/{registrationId}
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENTID=@null
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENTSECRET=@null
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_SCOPE=email,profile
+      - SPRING_MAIL_HOST=localhost
+      - SPRING_MAIL_USERNAME=smtpUser
+      - SPRING_MAIL_PASSWORD=smtpPassword
+      - TOKEN_SERVICE_SECRET=secret
+    ports:
+      - "8080:8080"
+      - "45005:45005"
+    depends_on:
+      - feedgears-db01
+    links:
+      - feedgears-db01
+      - feedgears-broker01
+  feedgears-engine01:
+    image: "lostsidewalk/newsgears-engine:latest-debug"
+    environment:
+      - DEBUG=false
+      - NEWSGEARS_DEVELOPMENT=false
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://feedgears-db01:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_REDIS_HOST=feedgears-cache01
+      - SPRING_REDIS_PASSWORD=redis
+    ports:
+      - "8082:8082"
+      - "55005:55005"
+    depends_on:
+      - feedgears-db01
+      - feedgears-cache01
+      - feedgears-app01
+    links:
+      - feedgears-db01
+  feedgears-broker01:
+    image: "lostsidewalk/newsgears-broker:latest-debug"
+    environment:
+      - DEBUG=false
+      - NEWSGEARS_DEVELOPMENT=false
+      - NEWSGEARS_SINGLEUSERMODE=true
+      - NEWSGEARS_ORIGINURL=http://localhost:[*]
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://feedgears-db01:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - TOKEN_SERVICE_SECRET=secret
+      - BROKERCLAIM_API=secret
+    ports:
+      - "8083:8083"
+      - "65015:65015"
+    depends_on:
+      - feedgears-db01
+  feedgears-client01:
+    image: "lostsidewalk/newsgears-client:latest"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - feedgears-app01
+      - feedgears-broker01
+volumes:
+  cache:
+    driver: local

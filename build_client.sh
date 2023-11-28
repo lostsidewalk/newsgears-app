@@ -11,12 +11,15 @@ echo "Current dir: ${CURRENT_DIR}"
 # change to the client dir
 cd newsgears-client
 
+# install dependencies 
+npm install 
+
 # build the artifacts via gradle
 npm run devbuild
 
 # build the docker image with the updated artifacts
 docker build \
-  -t lostsidewalk/newsgears-client:latest-local \
+  -t lostsidewalk/newsgears-client:latest \
   .
 
 # return to parent dir (newsgears-app)

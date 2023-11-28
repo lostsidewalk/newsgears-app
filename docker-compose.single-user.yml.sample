@@ -16,10 +16,11 @@ services:
     volumes:
       - cache:/data
   feedgears-app01:
-    image: "lostsidewalk/newsgears-api:latest-debug"
+    image: "lostsidewalk/newsgears-api:latest-local"
     environment:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
+      - NEWSGEARS_SINGLEUSERMODE=true
       - NEWSGEARS_APPURL=http://feedgears-app01:8080
       - NEWSGEARS_ORIGINURL=http://localhost:3000
       - NEWSGEARS_BROKERURL=ws://feedgears-broker01:8083/server-broker
@@ -46,7 +47,7 @@ services:
       - feedgears-db01
       - feedgears-broker01
   feedgears-engine01:
-    image: "lostsidewalk/newsgears-engine:latest-debug"
+    image: "lostsidewalk/newsgears-engine:latest-local"
     environment:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
@@ -65,10 +66,11 @@ services:
     links:
       - feedgears-db01
   feedgears-broker01:
-    image: "lostsidewalk/newsgears-broker:latest-debug"
+    image: "lostsidewalk/newsgears-broker:latest-local"
     environment:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
+      - NEWSGEARS_SINGLEUSERMODE=true
       - NEWSGEARS_ORIGINURL=http://localhost:[*]
       - SPRING_DATASOURCE_URL=jdbc:postgresql://feedgears-db01:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -81,7 +83,7 @@ services:
     depends_on:
       - feedgears-db01
   feedgears-client01:
-    image: "lostsidewalk/newsgears-client:latest-local"
+    image: "lostsidewalk/newsgears-client:latest"
     ports:
       - "3000:3000"
     depends_on:
