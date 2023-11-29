@@ -40,7 +40,6 @@ services:
       - TOKEN_SERVICE_SECRET=secret
     ports:
       - "8080:8080"
-      - "45005:45005"
     depends_on:
       - feedgears-db01
     links:
@@ -58,7 +57,6 @@ services:
       - SPRING_REDIS_PASSWORD=redis
     ports:
       - "8082:8082"
-      - "55005:55005"
     depends_on:
       - feedgears-db01
       - feedgears-cache01
@@ -79,7 +77,6 @@ services:
       - BROKERCLAIM_API=secret
     ports:
       - "8083:8083"
-      - "65015:65015"
     depends_on:
       - feedgears-db01
   feedgears-client01:

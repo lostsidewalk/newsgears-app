@@ -79,13 +79,6 @@ services:
       - "8083:8083"
     depends_on:
       - feedgears-db01
-  feedgears-client01:
-    image: "lostsidewalk/newsgears-client:latest"
-    ports:
-      - "3000:3000"
-    depends_on:
-      - feedgears-app01
-      - feedgears-broker01
 volumes:
   cache:
     driver: local
