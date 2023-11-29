@@ -21,7 +21,7 @@ services:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
       - NEWSGEARS_SINGLEUSERMODE=true
-      - NEWSGEARS_APPURL=http://feedgears-app01:8080
+      - NEWSGEARS_APPURL=http://localhost:8080
       - NEWSGEARS_ORIGINURL=http://localhost:3000
       - NEWSGEARS_BROKERURL=ws://feedgears-broker01:8083/server-broker
       - NEWSGEARS_BROKERCLAIM=secret
