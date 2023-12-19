@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 
-# newsgears-app
+# Newsgears
 
 Newsgears is a multi-user, self-hosted all-in-one RSS reader/aggregator platform. The Newsgears front-end is built using Vue3 and Vuetify, and the back-end is built using Spring Boot, ROME, and other free/open-source libraries and frameworks.  
 
