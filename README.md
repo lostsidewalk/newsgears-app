@@ -33,7 +33,7 @@ The Newsgears platform is comprised of your main components, thus this repositor
 
 **newsgears-broker**: a platform infrastructure component built to facilitate real-time communication between client and server components.
 
-## To self-host NewsGears:
+## To self-host Newsgears:
 
 ## 1. Setup docker-compose.yml:
 
