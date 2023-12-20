@@ -25,13 +25,13 @@ Newsgears is a multi-user, self-hosted all-in-one RSS reader/aggregator platform
 
 The Newsgears platform is comprised of your main components, thus this repository contains four submodules:
 
-**newsgears-api**: provides HTTP-based REST access to the core subscription management capabilities of the entire platform
+**[newsgears-api](https://github.com/lostsidewalk/newsgears-api)**: provides HTTP-based REST access to the core subscription management capabilities of the entire platform
 
-**newsgears-engine**: performs scheduled/periodic tasks, such as purging old/read posts, etc.
+**[newsgears-engine](https://github.com/lostsidewalk/newsgears-engine)**: performs scheduled/periodic tasks, such as purging old/read posts, etc.
 
-**newsgears-client**: a browser application to read and share syndicated web feed content.  
+**[newsgears-client](https://github.com/lostsidewalk/newsgears-client)**: a browser application to read and share syndicated web feed content.  
 
-**newsgears-broker**: a platform infrastructure component built to facilitate real-time communication between client and server components.
+**[newsgears-broker](https://github.com/lostsidewalk/newsgears-broker)**: a platform infrastructure component built to facilitate real-time communication between client and server components.
 
 ## To self-host Newsgears:
 
@@ -40,13 +40,23 @@ The Newsgears platform is comprised of your main components, thus this repositor
 The easiest way to get started is to use one of the provided docker-compose files, by cloning this repository and creating a symlink, as follows: 
 
 ```
-ln -s docker-compose.single-user.yml.sample docker-compose.yml
+ln -s *docker-compose.single-user.yml.sample* docker-compose.yml
 docker-compose up  
 ```
 
-This is the simplest configuration, and will boot the app with the minimal number of containers necessary to run the app, and without authentication.  
+This is the simplest configuration, and will boot the minimal number of containers necessary to run the app, and without authentication.  
 
-Once the containers are fully booted, navigating to http://localhost:3000 will take you directly into the app.   
+The `multi-user` configurations will cause the app to require authentication to login, either via OAuth2 (which must also be configured, see below), or via local user account registration.  The `debug` and `headless` configurartions are for development purposes, see below. 
+
+Note that you must have the following ports free on localhost: 
+- 5432 postgres
+- 6379 redis
+- 8080 API
+- 8082 engine
+- 8083 broker
+- 3000 front-end
+
+Once the containers are fully booted, navigating to [http://localhost:3000](http://localhost:3000) will take you directly into the app.   
 
 #### (Optional) If you want to enable OAUTH2 via Google:
 
@@ -71,6 +81,8 @@ The value of the ```scope``` property must be ```email,profile```, regardless of
 
 ## 2. For local development: 
 
+I recommend using IntelliJ IDEA w/Lombok and Gradle support for developing the back-end components, and vscode for developing the front-end. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.  
+
 ### build_module.sh: 
 
 A script called `build_module.sh` is provided to expedite image assembly for newsgears-api, newsgears-engine, and newsgears-broker:  
@@ -85,6 +97,8 @@ The `--debug <port>` parameter instructs the build script to configure the image
 
 The provided `docker-compose.single-user.debug.yml.sample` file uses the `latest-debug` images, and also exposes the necessary ports to reach your local debugger.  
 
+Thie script should be run from the top-level project directory (`newsgears-app`).  
+
 ### build_client.sh: 
 
 The client module image is assembled with `build_client.sh`: 
@@ -93,4 +107,6 @@ The client module image is assembled with `build_client.sh`:
 buid_client.sh
 ```
 
-The provided `headless` docker-compose files exclude the client module, so that you can run it in an IDE (vscode suggested), using `npm run devserve` (or similar).   
+The provided `headless` docker-compose files exclude the client module, so that you can run it in an IDE using `npm run devserve`. 
+
+Thie script should be run from the top-level project directory (`newsgears-app`).  
