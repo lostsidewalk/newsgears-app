@@ -40,7 +40,7 @@ The Newsgears platform is comprised of your main components, thus this repositor
 The easiest way to get started is to use one of the provided docker-compose files, by cloning this repository and creating a symlink, as follows: 
 
 ```
-ln -s *docker-compose.single-user.yml.sample* docker-compose.yml
+ln -s docker-compose.single-user.yml.sample docker-compose.yml
 docker-compose up  
 ```
 
