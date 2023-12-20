@@ -97,7 +97,7 @@ The `--debug <port>` parameter instructs the build script to configure the image
 
 The provided `docker-compose.single-user.debug.yml.sample` file uses the `latest-debug` images, and also exposes the necessary ports to reach your local debugger.  
 
-Thie script should be run from the top-level project directory (`newsgears-app`).  
+This script should be run from the top-level project directory (`newsgears-app`).  
 
 ### build_client.sh: 
 
@@ -109,7 +109,7 @@ buid_client.sh
 
 The provided `headless` docker-compose files exclude the client module, so that you can run it in an IDE using `npm run devserve`. 
 
-Thie script should be run from the top-level project directory (`newsgears-app`).  
+This script should be run from the top-level project directory (`newsgears-app`).  
 
 # Copyright and License
 
