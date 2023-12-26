@@ -1,17 +1,23 @@
 version: '2'
 services:
+  feedgears-router01:
+    image: "nginx:latest"
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - feedgears-app01
+      - feedgears-broker01
+      - feedgears-client01
   feedgears-db01:
     image: "postgres:latest"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
   feedgears-cache01:
     image: redis:6.2-alpine
     restart: always
-    ports:
-      - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass redis
     volumes:
       - cache:/data
@@ -21,8 +27,8 @@ services:
       - DEBUG=false
       - NEWSGEARS_DEVELOPMENT=false
       - NEWSGEARS_SINGLEUSERMODE=true
-      - NEWSGEARS_APPURL=http://localhost:8080
-      - NEWSGEARS_ORIGINURL=http://localhost:3000
+      - NEWSGEARS_APPURL=http://localhost/api
+      - NEWSGEARS_ORIGINURL=http://localhost
       - NEWSGEARS_BROKERURL=ws://feedgears-broker01:8083/server-broker
       - NEWSGEARS_BROKERCLAIM=secret
       - SPRING_DATASOURCE_URL=jdbc:postgresql://feedgears-db01:5432/postgres
@@ -38,8 +44,6 @@ services:
       - SPRING_MAIL_USERNAME=smtpUser
       - SPRING_MAIL_PASSWORD=smtpPassword
       - TOKEN_SERVICE_SECRET=secret
-    ports:
-      - "8080:8080"
     depends_on:
       - feedgears-db01
     links:
@@ -55,8 +59,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_REDIS_HOST=feedgears-cache01
       - SPRING_REDIS_PASSWORD=redis
-    ports:
-      - "8082:8082"
     depends_on:
       - feedgears-db01
       - feedgears-cache01
@@ -75,14 +77,14 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
       - TOKEN_SERVICE_SECRET=secret
       - BROKERCLAIM_API=secret
-    ports:
-      - "8083:8083"
     depends_on:
       - feedgears-db01
   feedgears-client01:
     image: "lostsidewalk/newsgears-client:latest"
-    ports:
-      - "3000:3000"
+    environment:
+      - VUE_APP_NEWSGEARS_API_URL=http://localhost/api
+      - VUE_APP_NEWSGEARS_ORIGIN_URL=http://localhost
+      - VUE_APP_NEWSGEARS_BROKER_URL=http://localhost/broker
     depends_on:
       - feedgears-app01
       - feedgears-broker01

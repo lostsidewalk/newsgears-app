@@ -18,7 +18,7 @@ services:
   feedgears-app01:
     image: "lostsidewalk/newsgears-api:latest-debug"
     environment:
-      - DEBUG=false
+      - DEBUG=true
       - NEWSGEARS_DEVELOPMENT=false
       - NEWSGEARS_SINGLEUSERMODE=true
       - NEWSGEARS_APPURL=http://localhost:8080
@@ -49,7 +49,7 @@ services:
   feedgears-engine01:
     image: "lostsidewalk/newsgears-engine:latest-debug"
     environment:
-      - DEBUG=false
+      - DEBUG=true
       - NEWSGEARS_DEVELOPMENT=false
       - SPRING_DATASOURCE_URL=jdbc:postgresql://feedgears-db01:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -68,7 +68,7 @@ services:
   feedgears-broker01:
     image: "lostsidewalk/newsgears-broker:latest-debug"
     environment:
-      - DEBUG=false
+      - DEBUG=true
       - NEWSGEARS_DEVELOPMENT=false
       - NEWSGEARS_SINGLEUSERMODE=true
       - NEWSGEARS_ORIGINURL=http://localhost:[*]
