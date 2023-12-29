@@ -48,15 +48,7 @@ This is the simplest configuration, and will boot the minimal number of containe
 
 The `multi-user` configurations will cause the app to require authentication to login, either via OAuth2 (which must also be configured, see below), or via local user account registration.  The `debug` and `headless` configurartions are for development purposes, see below. 
 
-Note that you must have the following ports free on localhost: 
-- 5432 postgres
-- 6379 redis
-- 8080 API
-- 8082 engine
-- 8083 broker
-- 3000 front-end
-
-Once the containers are fully booted, navigating to [http://localhost:3000](http://localhost:3000) will take you directly into the app.   
+Once the containers are fully booted, navigating to [http://localhost:80](http://localhost:80) will take you directly into the app.   
 
 #### (Optional) If you want to enable OAUTH2 via Google:
 
